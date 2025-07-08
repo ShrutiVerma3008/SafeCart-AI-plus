@@ -59,11 +59,47 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+@layer utilities {
+  .lowstim {
+    @apply bg-white text-black text-base tracking-wide;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .lowstim * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .lowstim button,
+  .lowstim a {
+    @apply bg-gray-100 text-black border border-gray-300 shadow-none;
+  }
+
+  .lowstim .shadow,
+  .lowstim .hover\:scale-105,
+  .lowstim .hover\:brightness-110 {
+    @apply shadow-none transform-none filter-none;
+  }
+}
+
+@layer utilities {
+  .touchvoice {
+    font-size: 1.15rem;
+    line-height: 1.6;
+  }
+
+  .touchvoice button,
+  .touchvoice a,
+  .touchvoice input,
+  .touchvoice select {
+    @apply p-4 text-lg rounded-xl;
+  }
+
+  .touchvoice [role="button"] {
+    font-weight: bold;
+    border-width: 2px;
+  }
+
+  .touchvoice .grid {
+    @apply gap-6;
   }
 }

@@ -84,6 +84,9 @@ import EmotionSelector from "@/components/EmotionSelector"; // ✅ make sure you
 import EmotionDetector from "@/components/EmotionDetector";
 import SignAvatar from "@/components/SignAvatar";
 import PrivacyBanner from "@/components/PrivacyBanner"
+import TouchVoiceLayoutDemo from "@/components/TouchVoiceLayoutDemo";
+import VoiceMic from '@/components/VoiceMic';
+import VoiceAssistantPanel from '@/components/VoiceAssistantPanel';
 
 export default function Home() {
   // ✅ Only call the hook ONCE
@@ -140,9 +143,14 @@ export default function Home() {
 
           {/* ✅ Mode Toggles + Emotion Selector */}
           <ModeToggles />
+          <VoiceAssistantPanel />
+          <VoiceMic />
           <EmotionSelector />
           <EmotionDetector />
-          <SignAvatar />
+          <SignAvatar context="general" />
+          <SignAvatar context="checkout" />
+          <SignAvatar context="greeting" />
+          {/* <SignAvatar message="Welcome! Please take your cart." /> */}
           <PrivacyBanner />
 
         </div>
@@ -190,7 +198,21 @@ export default function Home() {
             🖐️ Touch/Voice Mode: Interface adjusts for voice input or large touch targets.
           </div>
         )}
+        {touchVoiceMode && <TouchVoiceLayoutDemo />}
+
       </section>
+
+        <section className="mt-6 text-sm text-muted-foreground max-w-xl w-full">
+          <h4 className="font-semibold text-base mb-2">🗣️ Try These Voice Commands:</h4>
+          <ul className="list-disc list-inside leading-relaxed">
+            <li><strong>“Start checkout”</strong> – Enables Sign Mode + switches to Grid layout</li>
+            <li><strong>“Go to cart”</strong> – Navigates to Cart page</li>
+            <li><strong>“Activate low stim”</strong> – Enables Low-Stimulation Mode</li>
+            <li><strong>“Start scanning”</strong> – Activates Emotion Mode (camera input)</li>
+
+          </ul>
+        </section>
+
     </main>
   );
 }

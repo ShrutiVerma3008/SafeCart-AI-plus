@@ -38,6 +38,7 @@
 //     </html>
 //   );
 // }
+import { SignContextProvider } from "@/context/SignContext";
 import { UserModeProvider } from "@/context/UserModeContext";
 import type { Metadata } from "next";
 import { CartProvider } from "@/context/CartContext";
@@ -71,14 +72,21 @@ export default function RootLayout({
           crossOrigin="anonymous"
           src="//unpkg.com/same-runtime/dist/index.global.js"
         />
+        <Script
+          src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"
+          strategy="beforeInteractive"
+        />
+
       </head>
       <body suppressHydrationWarning className="antialiased">
         <CartProvider>
           <UserModeProvider> {/* 👈 wrap all children */}
+            <SignContextProvider>
             <ClientBody>
               <Navbar />
               {children}
             </ClientBody>
+            </SignContextProvider>
           </UserModeProvider>
         </CartProvider>
       </body>
