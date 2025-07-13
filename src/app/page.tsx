@@ -77,6 +77,8 @@
 
 'use client'
 
+import { scrollToId } from '@/lib/scrollTo';   // ← add this
+import { useState } from 'react'; 
 import Link from "next/link";
 import { useUserMode } from "@/context/UserModeContext";
 import ModeToggles from "@/context/ModeToggles"; // ✅ corrected path
@@ -87,6 +89,7 @@ import PrivacyBanner from "@/components/PrivacyBanner"
 import TouchVoiceLayoutDemo from "@/components/TouchVoiceLayoutDemo";
 import VoiceMic from '@/components/VoiceMic';
 import VoiceAssistantPanel from '@/components/VoiceAssistantPanel';
+import LearnMoreDrawer from "@/components/LearnMoreDrawer";
 
 export default function Home() {
   // ✅ Only call the hook ONCE
@@ -95,8 +98,10 @@ export default function Home() {
     lowStimMode,
     signMode,
     touchVoiceMode,
-    emotionType,
+    emotionType
   } = useUserMode();
+
+  const [showLearn, setShowLearn] = useState(false);
 
   const emotionStyles: Record<string, string> = {
     calm: "bg-blue-50 text-blue-900",
@@ -107,11 +112,11 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-background px-4 pb-8">
       {/* Navigation */}
-      <nav className="w-full py-4 flex justify-end gap-6 text-sm font-medium text-muted-foreground">
+      {/* <nav className="w-full py-4 flex justify-end gap-6 text-sm font-medium text-muted-foreground">
         <Link href="/features">Features</Link>
         <Link href="/cart">SmartCart</Link>
         <Link href="/privacy">Privacy Copilot</Link>
-      </nav>
+      </nav> */}
 
       {/* Hero Section */}
       <section className="flex-1 w-full flex flex-col md:flex-row items-center md:justify-between mt-10 max-w-5xl gap-8">
@@ -130,21 +135,42 @@ export default function Home() {
             >
               Quickstart Demo
             </Link>
-            <Link href="#features" className="px-6 py-3 rounded-xl border">
+            {/* <Link
+              href="#features"
+              className="px-6 py-3 rounded-full bg-white/10 backdrop-blur border border-white/30 shadow-sm text-primary hover:bg-white/20 transition-all duration-300 font-semibold text-sm hover:scale-105"
+            >
               Learn More
-            </Link>
+            </Link> */}
+
             <Link
+              // className="rounded-xl bg-chart-1 px-6 py-3 text-white font-semibold text-lg shadow-lg hover:scale-105 hover:brightness-110 transition-transform duration-200"
               className="rounded-xl bg-chart-1 px-6 py-3 text-white font-semibold text-lg shadow-lg hover:scale-105 hover:brightness-110 transition-transform duration-200"
               href="/onboard"
             >
               Personalize SmartCart
             </Link>
+
+               <Link
+        href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          setShowLearn(true);
+        }}
+        className="px-6 py-3 rounded-full bg-white/10 backdrop-blur border 
+                   border-white/30 shadow-sm text-primary hover:bg-white/20
+                   transition-all duration-300 font-semibold text-sm hover:scale-105"
+      >
+        Learn More
+      </Link>
+
+      {/* Drawer component */}
+      <LearnMoreDrawer open={showLearn} onClose={() => setShowLearn(false)} />
           </div>
 
           {/* ✅ Mode Toggles + Emotion Selector */}
           <ModeToggles />
           <VoiceAssistantPanel />
-          <VoiceMic />
+          {/* <VoiceMic /> */}
           <EmotionSelector />
           <EmotionDetector />
           <SignAvatar context="general" />
@@ -202,7 +228,7 @@ export default function Home() {
 
       </section>
 
-        <section className="mt-6 text-sm text-muted-foreground max-w-xl w-full">
+        {/* <section className="mt-6 text-sm text-muted-foreground max-w-xl w-full">
           <h4 className="font-semibold text-base mb-2">🗣️ Try These Voice Commands:</h4>
           <ul className="list-disc list-inside leading-relaxed">
             <li><strong>“Start checkout”</strong> – Enables Sign Mode + switches to Grid layout</li>
@@ -211,7 +237,7 @@ export default function Home() {
             <li><strong>“Start scanning”</strong> – Activates Emotion Mode (camera input)</li>
 
           </ul>
-        </section>
+        </section> */}
 
     </main>
   );

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { name: "Features", href: "/features" },
   { name: "SmartCart", href: "/cart" },
-  { name: "Privacy", href: "/privacy" },
+  { name: "Privacy Copilot", href: "/privacy" },
 ];
 
 export default function Navbar() {

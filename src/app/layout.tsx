@@ -47,6 +47,7 @@ import "./globals.css";
 import ClientBody from "./ClientBody";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -83,8 +84,11 @@ export default function RootLayout({
           <UserModeProvider> {/* 👈 wrap all children */}
             <SignContextProvider>
             <ClientBody>
+              <CartProvider>
               <Navbar />
               {children}
+              <Footer/>
+              </CartProvider>
             </ClientBody>
             </SignContextProvider>
           </UserModeProvider>
@@ -93,3 +97,7 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+
+
